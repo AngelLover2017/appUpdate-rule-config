@@ -13,12 +13,14 @@ class ConfigureApplicationTests {
 
 	@Test
 	void addRule() {
-		Rule rule = new Rule(null, 1, "iOS", "http://www.baidu.com",
-				"8.1.3.01", "md1145141919810", null,
-				"gfgfgf", "dfddf",
-				13434, 354, "32", "dfdf",
-				"update_title", "update_tips", 0);
-		configureController.insert(rule);
+		for (int i = 1; i <= 100; i++) {
+			Rule rule = new Rule(null, i, "iOS", "http://www.baidu.com",
+					"8.1.3.01", "md1145141919810", null,
+					"gfgfgf", "dfddf",
+					13434, 354, "32", "dfdf",
+					"update_title", "update_tips", 0);
+			configureController.insert(rule);
+		}
 	}
 
 	@Test
