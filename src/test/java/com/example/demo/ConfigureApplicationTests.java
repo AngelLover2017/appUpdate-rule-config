@@ -30,4 +30,9 @@ class ConfigureApplicationTests {
 	void getRulesNum() {
 		System.out.println(configureController.getRulesNum());
 	}
+
+	@Test
+	void updateStatus(){
+		System.out.println(configureController.updateRule(38, 2));
+	}
 }

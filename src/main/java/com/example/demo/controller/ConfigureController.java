@@ -26,6 +26,16 @@ public class ConfigureController {
         }
     }
 
+    @PostMapping("/update_ruleStatus")
+    public ReturnMessage updateRule(@RequestParam Integer id, @RequestParam Integer toStatus){
+        boolean isOk = ruleService.updateRuleStatus(id, toStatus);
+        if(isOk){
+            return ReturnMessage.success();
+        }else{
+            return ReturnMessage.fail(400).setMessage("Failed.");
+        }
+    }
+
     @GetMapping("/get_rules")
     public ReturnMessage selectRulesByPage(@RequestParam int pageNum, @RequestParam int pageCount) {
         List<Rule> rules = ruleService.selectRulesByPage(pageNum, pageCount);
