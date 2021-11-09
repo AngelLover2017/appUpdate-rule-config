@@ -14,18 +14,29 @@ import java.util.HashSet;
 public class RuleService {
     @Resource
     private RuleMapper ruleMapper;
+
     @Resource
     private RedisTemplate<String, HashSet<String>> redisTemplate;
+
+    public boolean checkRule(Rule rule) {
+        return true;
+    }
+
     public boolean configureRule(Rule rule){
+        if (!checkRule(rule)) {
+            return false;
+        }
         ValueOperations<String, HashSet<String>> operations = redisTemplate.opsForValue();
         int result = ruleMapper.insert(rule);
         if(result==0)
             return false;
         if(!rule.getPlatform().equals("IOS") && (rule.getMax_os_api()==null || rule.getMin_os_api()==null))
             return false;
-        String[] whiteList=rule.getDevice_id_list().split(" ");
-        HashSet<String> set = new HashSet<>(Arrays.asList(whiteList));
-        operations.set(rule.getId().toString(),set);
+        if (rule.getDevice_id_list()!= null) {
+            String[] whiteList=rule.getDevice_id_list().split(" ");
+            HashSet<String> set = new HashSet<>(Arrays.asList(whiteList));
+            operations.set(rule.getId().toString(),set);
+        }
         return true;
     }
 }
