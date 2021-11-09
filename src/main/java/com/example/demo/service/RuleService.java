@@ -45,6 +45,10 @@ public class RuleService {
         return ruleMapper.updateStatus(id, toStatus)>0;
     }
 
+    public int getRuleStatusById(Integer id){
+        return ruleMapper.getRuleStatus(id);
+    }
+
     public List<Rule> selectRulesByPage(int pageNum, int pageCount) {
         pageNum = (pageNum - 1) * pageCount;
         if (pageNum < 0) {

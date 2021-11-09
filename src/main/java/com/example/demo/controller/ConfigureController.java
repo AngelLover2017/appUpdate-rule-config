@@ -28,6 +28,9 @@ public class ConfigureController {
 
     @PostMapping("/update_ruleStatus")
     public ReturnMessage updateRule(@RequestParam Integer id, @RequestParam Integer toStatus){
+        if(ruleService.getRuleStatusById(id)==2){
+            return ReturnMessage.fail(400).setMessage("Failed. Rule has been offline");
+        }
         boolean isOk = ruleService.updateRuleStatus(id, toStatus);
         if(isOk){
             return ReturnMessage.success();

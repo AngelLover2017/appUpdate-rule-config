@@ -17,8 +17,11 @@ public interface RuleMapper {
     @Transactional
     int insert(Rule rule);
 
-    @Update("UPDATE `test`.`rule` SET `status`=#{toStatus} where `id`=#{id}")
+    @Update("UPDATE `test`.`rule` SET `status`=#{toStatus} WHERE `id`=#{id}")
     int updateStatus(Integer id, Integer toStatus);
+
+    @Select("SELECT `status` FROM `test`.`rule` WHERE `id`=#{id}")
+    int getRuleStatus(Integer id);
 
     @Select("SELECT * FROM `test`.`rule` LIMIT #{pageNum}, #{pageCount}")
     List<Rule> select(int pageNum, int pageCount);

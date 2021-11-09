@@ -33,6 +33,9 @@ class ConfigureApplicationTests {
 
 	@Test
 	void updateStatus(){
-		System.out.println(configureController.updateRule(38, 2));
+		System.out.println(configureController.updateRule(39, 1));
+		System.out.println(configureController.updateRule(39, 0));
+		System.out.println(configureController.updateRule(39, 2));
+		System.out.println(configureController.updateRule(39, 0));
 	}
 }
