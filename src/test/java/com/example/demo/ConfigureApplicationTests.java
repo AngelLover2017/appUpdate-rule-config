@@ -21,4 +21,13 @@ class ConfigureApplicationTests {
 		configureController.insert(rule);
 	}
 
+	@Test
+	void selectRules() {
+		System.out.println(configureController.selectRulesByPage(1, 10));
+	}
+
+	@Test
+	void getRulesNum() {
+		System.out.println(configureController.getRulesNum());
+	}
 }

@@ -25,4 +25,15 @@ public class ConfigureController {
             return ReturnMessage.fail(400).setMessage("Failed. Please check your data!");
         }
     }
+
+    @GetMapping("/get_rules")
+    public ReturnMessage selectRulesByPage(@RequestParam int pageNum, @RequestParam int pageCount) {
+        List<Rule> rules = ruleService.selectRulesByPage(pageNum, pageCount);
+        return ReturnMessage.success().setParam("rules", rules);
+    }
+
+    @GetMapping("/get_num")
+    public ReturnMessage getRulesNum() {
+        return ReturnMessage.success().setParam("num", ruleService.getRulesNum());
+    }
 }

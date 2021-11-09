@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 
 @Service
 public class RuleService {
@@ -38,5 +39,20 @@ public class RuleService {
             operations.set(rule.getId().toString(),set);
         }
         return true;
+    }
+
+    public List<Rule> selectRulesByPage(int pageNum, int pageCount) {
+        pageNum = (pageNum - 1) * pageCount;
+        if (pageNum < 0) {
+            pageNum = 0;
+        }
+        if (pageCount < 0) {
+            pageCount = 10;
+        }
+        return ruleMapper.select(pageNum, pageCount);
+    }
+
+    public int getRulesNum() {
+        return ruleMapper.getRulesNum();
     }
 }
