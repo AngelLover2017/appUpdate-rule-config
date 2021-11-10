@@ -1,6 +1,8 @@
 package com.example.demo.service;
 
+import com.example.demo.entity.ReturnMessage;
 import com.example.demo.entity.Rule;
+import com.example.demo.entity.UserInformation;
 import com.example.demo.mapper.RuleMapper;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
@@ -39,6 +41,22 @@ public class RuleService {
             operations.set(rule.getId().toString(),set);
         }
         return true;
+    }
+
+    public String tokenIdentify(String username, String password){
+        UserInformation userInformation = ruleMapper.getUserByName(username);
+        if(username.equals("") || password.equals("")){
+            return "缺少用户名或密码参数";
+        }
+        if(!userInformation.getPassword().equals(password)){
+            // 密码错误
+            return "密码错误或用户名不存在";
+        }
+        if(userInformation.getPermission()!=1){
+            // 不是管理员
+            return "无管理员权限";
+        }
+        return "success";
     }
 
     public boolean updateRuleStatus(Integer id, Integer toStatus){
