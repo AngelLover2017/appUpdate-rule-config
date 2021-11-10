@@ -28,4 +28,7 @@ public interface RuleMapper {
 
     @Select("SELECT COUNT(*) FROM `test`.`rule`")
     int getRulesNum();
+
+    @Select("SELECT `device_id_list` FROM `test`.`rule` WHERE `id`=#{id}")
+    String getDeviceIdListById(Integer id);
 }

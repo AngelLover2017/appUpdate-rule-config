@@ -42,6 +42,14 @@ public class RuleService {
     }
 
     public boolean updateRuleStatus(Integer id, Integer toStatus){
+        ValueOperations<String, HashSet<String>> operations = redisTemplate.opsForValue();
+        if(toStatus!=0){
+            redisTemplate.delete(id.toString());
+        }else{
+            String[] whiteList = ruleMapper.getDeviceIdListById(id).split(" ");
+            HashSet<String> set = new HashSet<>(Arrays.asList(whiteList));
+            operations.set(id.toString(),set);
+        }
         return ruleMapper.updateStatus(id, toStatus)>0;
     }
 
