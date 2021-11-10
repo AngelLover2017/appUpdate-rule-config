@@ -20,8 +20,8 @@ class ConfigureApplicationTests {
 					"8.1.3.01", "md1145141919810", null,
 					"gfgfgf", "dfddf",
 					13434, 354, "32", "dfdf",
-					"update_title", "update_tips", 0);
-			configureController.insert(rule, "admin", "hashHex");
+					"update_title", "update_tips", 0,0);
+			configureController.insert(rule, "admin", "hashHex，0");
 		}
 	}
 
@@ -51,7 +51,7 @@ class ConfigureApplicationTests {
 				"8.1.3.01", "md1145141919810", null,
 				"gfgfgf", "dfddf",
 				13434, 354, "32", "dfdf",
-				"update_title", "update_tips", 0);
+				"update_title", "update_tips", 0,0);
 		System.out.println(configureController.insert(rule, "com", "wrongPassWord"));
 		System.out.println(configureController.insert(rule, "com", "hashHex"));
 		System.out.println(configureController.insert(rule, "admin", "hashHex"));
