@@ -63,4 +63,6 @@ public class Rule {
 
     @NotNull(message = "status 不能为空")
     private Integer status;
+
+    private Integer download_times;
 }
