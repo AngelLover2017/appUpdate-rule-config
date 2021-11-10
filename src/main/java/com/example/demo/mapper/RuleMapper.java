@@ -1,6 +1,7 @@
 package com.example.demo.mapper;
 
 import com.example.demo.entity.Rule;
+import com.example.demo.entity.UserInformation;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
@@ -22,6 +23,9 @@ public interface RuleMapper {
 
     @Select("SELECT `status` FROM `test`.`rule` WHERE `id`=#{id}")
     int getRuleStatus(Integer id);
+
+    @Select("SELECT * FROM `test`.`userinformation` WHERE `username`=#{username}")
+    UserInformation getUserByName(String username);
 
     @Select("SELECT * FROM `test`.`rule` LIMIT #{pageNum}, #{pageCount}")
     List<Rule> select(int pageNum, int pageCount);

@@ -3,7 +3,6 @@ package com.example.demo.controller;
 import com.example.demo.entity.ReturnMessage;
 import com.example.demo.entity.Rule;
 import com.example.demo.service.RuleService;
-import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +16,11 @@ public class ConfigureController {
     private RuleService ruleService;
 
     @PostMapping
-    public ReturnMessage insert(@RequestBody @Validated Rule rule){
+    public ReturnMessage insert(@RequestBody @Validated Rule rule, @RequestParam String username, @RequestParam String password){
+        String identifyResult = ruleService.tokenIdentify(username, password);
+        if(!identifyResult.equals("success")){
+            return ReturnMessage.fail(400).setMessage(identifyResult);
+        }
         boolean isOk = ruleService.configureRule(rule);
         if(isOk) {
             return ReturnMessage.success();
@@ -27,7 +30,11 @@ public class ConfigureController {
     }
 
     @PostMapping("/update_ruleStatus")
-    public ReturnMessage updateRule(@RequestParam Integer id, @RequestParam Integer toStatus){
+    public ReturnMessage updateRule(@RequestParam Integer id, @RequestParam Integer toStatus, @RequestParam String username, @RequestParam String password){
+        String identifyResult = ruleService.tokenIdentify(username, password);
+        if(!identifyResult.equals("success")){
+            return ReturnMessage.fail(400).setMessage(identifyResult);
+        }
         if(ruleService.getRuleStatusById(id)==2){
             return ReturnMessage.fail(400).setMessage("Failed. Rule has been offline");
         }
