@@ -28,8 +28,8 @@ public class RedisLoadUtil {
     public void reload() {
         int dataNum = ruleMapper.getRulesNum();
         int beginId = 0;
-        for (int i = 0; i < dataNum; i += 1) {
-            List<Rule> rules = ruleMapper.getPartOfDeviceIdList(beginId, 1);
+        for (int i = 0; i < dataNum; i += 10000) {
+            List<Rule> rules = ruleMapper.getPartOfDeviceIdList(beginId, 10000);
             ValueOperations<String, HashSet<String>> operations = redisTemplate.opsForValue();
             for (Rule r:rules) {
                 boolean hasKey = redisTemplate.hasKey(r.getId().toString());
