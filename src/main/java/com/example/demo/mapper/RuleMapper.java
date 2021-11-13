@@ -2,14 +2,12 @@ package com.example.demo.mapper;
 
 import com.example.demo.entity.Rule;
 import com.example.demo.entity.UserInformation;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface RuleMapper {
@@ -35,4 +33,7 @@ public interface RuleMapper {
 
     @Select("SELECT `device_id_list` FROM `test`.`rule` WHERE `id`=#{id}")
     String getDeviceIdListById(Integer id);
+
+    @Select("SELECT * FROM `test`.`rule` WHERE `id`>#{id} AND STATUS = 0 LIMIT #{num}")
+    List<Rule> getPartOfDeviceIdList(Integer id, Integer num);
 }
