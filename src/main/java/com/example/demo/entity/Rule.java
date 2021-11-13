@@ -2,6 +2,7 @@ package com.example.demo.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 import javax.validation.constraints.NotBlank;
@@ -9,6 +10,7 @@ import javax.validation.constraints.NotNull;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class Rule {
     private Integer id;
 
