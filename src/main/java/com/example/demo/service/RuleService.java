@@ -22,6 +22,14 @@ public class RuleService {
     private RedisTemplate<String, HashSet<String>> redisTemplate;
 
     public boolean checkRule(Rule rule) {
+        String[] versionCode = new String[]{rule.getMax_update_version_code(),rule.getMin_update_version_code(),rule.getUpdate_version_code()};
+        for(String s:versionCode){
+            for(int i=0 ; i<s.length() ; i++){
+                char c=s.charAt(i);
+                if(!Character.isDigit(c)&&c!='.')
+                    return false;
+            }
+        }
         return true;
     }
 
@@ -48,7 +56,7 @@ public class RuleService {
         if(username.equals("") || password.equals("")){
             return "缺少用户名或密码参数";
         }
-        if(!userInformation.getPassword().equals(password)){
+        if(userInformation==null || !userInformation.getPassword().equals(password)){
             // 密码错误
             return "密码错误或用户名不存在";
         }

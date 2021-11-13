@@ -21,7 +21,7 @@ class ConfigureApplicationTests {
 					"gfgfgf", "dfddf",
 					13434, 354, "32", "dfdf",
 					"update_title", "update_tips", 0,0);
-			configureController.insert(rule, "admin", "hashHex，0");
+			configureController.insert(rule, "11", "hashHex，11");
 		}
 	}
 
